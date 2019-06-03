@@ -1,0 +1,85 @@
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="good">
+        <xs:sequence>
+            <xs:element type="xs:string" name="manufacturer"/>
+            <xs:element name="model">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-zA-Z][a-zA-Z]\d{3}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="date">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="(0[1-9]|[1-2]\d|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}"/>
+                        <xs:length value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element type="xs:string" name="color"/>
+            <xs:element type="xs:string" name="amount"/>
+        </xs:sequence>
+        <xs:attribute type="xs:integer" name="id"/>
+    </xs:complexType>
+
+    <xs:element name="goods">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="food">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="cake">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="good" maxOccurs="unbounded" minOccurs="0" type="good"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="candy">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="good" maxOccurs="unbounded" minOccurs="0" type="good"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="clothes">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="coat">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="good" maxOccurs="unbounded" minOccurs="0" type="good"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="tshirt">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="good" maxOccurs="unbounded" minOccurs="0" type="good"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="furniture">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="table">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="good" maxOccurs="unbounded" minOccurs="0" type="good"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

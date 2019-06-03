@@ -6,23 +6,34 @@ import service.ConverterXMLJSON;
 import service.ParserXML;
 import service.ValidatorXML;
 
-import java.io.File;
+import java.io.*;
+import java.net.URL;
+import java.util.Objects;
+import java.util.Properties;
 
 public class DemoService {
     private static final Logger log = LogManager.getLogger(DemoService.class.getName());
 
-    private DemoService() {
-    }
+    public void execute() {
+        Properties properties = new Properties();
+        File xmlFile = null;
+        File xsdFile = null;
+        File jsonFile = null;
+        File resultXmlFile = null;
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        try (InputStream inputStream = loader.getResourceAsStream("config.properties")) {
+            properties.load(inputStream);
+            xmlFile = new File(properties.getProperty("xml"));
+            xsdFile = new File(properties.getProperty("xsd"));
+            jsonFile = new File(properties.getProperty("json"));
+            resultXmlFile = new File(properties.getProperty("result.xml"));
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+        ParserXML.showXMLStructure(xmlFile);
+        log.info("XML is valid? " + ValidatorXML.validate(xmlFile, xsdFile));
 
-    public static void execute() {
-        File xml = new File("src/parser/resources/goods.xml");
-        ParserXML.showXMLStructure(xml);
-
-        File xsd = new File("src/parser/resources/goods.xsd");
-        log.info("XML is valid? " + ValidatorXML.validate(xml, xsd));
-
-        File json = new File("src/parser/resources/converted/goods.json");
-        ConverterXMLJSON.convertXMLtoJSON(xml.getPath(), json.getPath());
-        ConverterXMLJSON.convertJSONtoXML(json.getPath(), "src/parser/resources/converted/goods.xml");
+        ConverterXMLJSON.convertXMLtoJSON(xmlFile.getPath(), jsonFile.getPath());
+        ConverterXMLJSON.convertJSONtoXML(jsonFile.getPath(), resultXmlFile.getPath());
     }
 }

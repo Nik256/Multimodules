@@ -9,7 +9,50 @@
     <packaging>pom</packaging>
     <version>1.0</version>
 
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>env</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+            <properties>
+                <xml>D:/Homeworks/Xml/prod/goods.xml</xml>
+                <xsd>D:/Homeworks/Xml/prod/goods.xsd</xsd>
+                <json>D:/Homeworks/Xml/converted/goods.json</json>
+                <result.xml>D:/Homeworks/Xml/converted/goods.xml</result.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>qa</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>qa</value>
+                </property>
+            </activation>
+            <properties>
+                <xml>D:/Homeworks/Xml/qa/goods.xml</xml>
+                <xsd>D:/Homeworks/Xml/qa/goods.xsd</xsd>
+                <json>D:/Homeworks/Xml/converted/goods.json</json>
+                <result.xml>D:/Homeworks/Xml/converted/goods.xml</result.xml>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -31,7 +74,8 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>parser.Main</mainClass>
                                 </transformer>
                             </transformers>
