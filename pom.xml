@@ -23,7 +23,7 @@
                 <xml>D:/Homeworks/Xml/prod/goods.xml</xml>
                 <xsd>D:/Homeworks/Xml/prod/goods.xsd</xsd>
                 <json>D:/Homeworks/Xml/converted/goods.json</json>
-                <result.xml>D:/Homeworks/Xml/converted/goods.xml</result.xml>
+                <resultXml>D:/Homeworks/Xml/converted/goods.xml</resultXml>
             </properties>
         </profile>
 
@@ -39,7 +39,7 @@
                 <xml>D:/Homeworks/Xml/qa/goods.xml</xml>
                 <xsd>D:/Homeworks/Xml/qa/goods.xsd</xsd>
                 <json>D:/Homeworks/Xml/converted/goods.json</json>
-                <result.xml>D:/Homeworks/Xml/converted/goods.xml</result.xml>
+                <resultXml>D:/Homeworks/Xml/converted/goods.xml</resultXml>
             </properties>
         </profile>
     </profiles>
